@@ -43,8 +43,7 @@ ARG SCIPY_VERSION=1.2.1
 ARG SKLEARN_VERSION=0.20.3
 ARG TINI_URL=https://github.com/krallin/tini/releases/download/v0.18.0/tini
 
-RUN yum install -y ${RAPIDS_SRC_DIR}/tmp/*.rpm \
-    && yum upgrade -y \
+RUN yum upgrade -y \
     && yum install -y \
            bzip2 \
            curl \
