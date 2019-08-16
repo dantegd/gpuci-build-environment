@@ -1,9 +1,9 @@
 ssl_verify: False
 show_channel_urls: True
 channels:
-  - rapidsai
-  - nvidia
-  - rapidsai-nightly
-  - numba
-  - conda-forge
-  - anaconda
+  - http://conda-mirror.rapids.ai/rapidsai
+  - http://conda-mirror.rapids.ai/nvidia
+  - http://conda-mirror.rapids.ai/rapidsai-nightly
+  - http://conda-mirror.rapids.ai/numba
+  - http://conda-mirror.rapids.ai/conda-forge
+  - http://conda-mirror.rapids.ai/anaconda
