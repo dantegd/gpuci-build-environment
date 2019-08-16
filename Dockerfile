@@ -62,58 +62,58 @@ RUN apt-get update -y --fix-missing && \
 
 # Install conda
 ## Build combined libgdf/pygdf conda env
-RUN curl ${MINICONDA_URL} -o /miniconda.sh && \
-      sh /miniconda.sh -b -p /conda && \
-      rm -f /miniconda.sh && \
-      echo "conda ${CONDA_VERSION}" >> /conda/conda-meta/pinned
+RUN curl ${MINICONDA_URL} -o /miniconda.sh \
+    && sh /miniconda.sh -b -p /conda \
+    && rm -f /miniconda.sh \
+    && echo "conda ${CONDA_VERSION}" >> /conda/conda-meta/pinned
 
 # Add a condarc to remove blacklist
 ADD .condarc /conda/.condarc
 
 # Add utlities to base env
 RUN conda install -y \
-      codecov \
-      conda=${CONDA_VERSION} \
-      conda-build=${CONDA_BUILD_VERSION} \
-      conda-verify=${CONDA_VERIFY_VERSION}
+          codecov \
+          conda=${CONDA_VERSION} \
+          conda-build=${CONDA_BUILD_VERSION} \
+          conda-verify=${CONDA_VERIFY_VERSION}
 
 # Create gdf conda env
 RUN conda create --no-default-packages -n gdf \
-      python=${PYTHON_VERSION} \
-      anaconda-client \
-      arrow-cpp=${ARROW_CPP_VERSION} \
-      cffi=${CFFI_VERSION} \
-      cmake=${CMAKE_VERSION} \
-      cmake_setuptools \
-      conda=${CONDA_VERSION} \
-      conda-build=${CONDA_BUILD_VERSION} \
-      conda-verify=${CONDA_VERIFY_VERSION} \
-      cudatoolkit=${CUDA_SHORT_VERSION} \
-      cython=${CYTHON_VERSION} \
-      flake8 \
-      black \
-      isort \
-      make \
-      numba>=${NUMBA_VERSION} \
-      numpy=${NUMPY_VERSION} \
-      pandas=${PANDAS_VERSION} \
-      pyarrow=${PYARROW_VERSION} \
-      double-conversion=${DOUBLE_CONVERSION_VERSION} \
-      rapidjson=${RAPIDJSON_VERSION} \
-      flatbuffers=${FLATBUFFERS_VERSION} \
-      boost-cpp=${BOOST_CPP_VERSION} \
-      fastavro=${FASTAVRO_VERSION} \
-      dlpack=${DLPACK_VERSION} \
-      pytest \
-      pytest-cov \
-      scikit-learn=${SKLEARN_VERSION} \
-      scipy=${SCIPY_VERSION} \
-      conda-forge::blas=1.1=openblas \
-      libgcc-ng=${LIBGCC_NG_VERSION} \
-      libgfortran-ng=${LIBGFORTRAN_NG_VERSION} \
-      libstdcxx-ng=${LIBSTDCXX_NG_VERSION} \
-      && conda clean -a && \
-      chmod 777 -R /conda
+          python=${PYTHON_VERSION} \
+          anaconda-client \
+          arrow-cpp=${ARROW_CPP_VERSION} \
+          cffi=${CFFI_VERSION} \
+          cmake=${CMAKE_VERSION} \
+          cmake_setuptools \
+          conda=${CONDA_VERSION} \
+          conda-build=${CONDA_BUILD_VERSION} \
+          conda-verify=${CONDA_VERIFY_VERSION} \
+          cudatoolkit=${CUDA_SHORT_VERSION} \
+          cython=${CYTHON_VERSION} \
+          flake8 \
+          black \
+          isort \
+          make \
+          numba>=${NUMBA_VERSION} \
+          numpy=${NUMPY_VERSION} \
+          pandas=${PANDAS_VERSION} \
+          pyarrow=${PYARROW_VERSION} \
+          double-conversion=${DOUBLE_CONVERSION_VERSION} \
+          rapidjson=${RAPIDJSON_VERSION} \
+          flatbuffers=${FLATBUFFERS_VERSION} \
+          boost-cpp=${BOOST_CPP_VERSION} \
+          fastavro=${FASTAVRO_VERSION} \
+          dlpack=${DLPACK_VERSION} \
+          pytest \
+          pytest-cov \
+          scikit-learn=${SKLEARN_VERSION} \
+          scipy=${SCIPY_VERSION} \
+          conda-forge::blas=1.1=openblas \
+          libgcc-ng=${LIBGCC_NG_VERSION} \
+          libgfortran-ng=${LIBGFORTRAN_NG_VERSION} \
+          libstdcxx-ng=${LIBSTDCXX_NG_VERSION} \
+    && conda clean -a \
+    && chmod -R ugo+w /conda
 
 ## Enables "source activate conda"
 SHELL ["/bin/bash", "-c"]
