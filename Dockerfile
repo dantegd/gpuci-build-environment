@@ -44,21 +44,21 @@ ENV PATH=${PATH}:/conda/bin
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Update and add pkgs
-RUN apt-get update -y --fix-missing && \
-      apt-get upgrade -y && \
-      apt-get -qq install apt-utils -y --no-install-recommends && \
-      apt-get install -y \
-      curl \
-      git \
-      screen \
-      gcc-${CC_VERSION} \
-      g++-${CXX_VERSION} \
-      libboost-all-dev \
-      tzdata \
-      wget \
-      vim \
-      zlib1g-dev \
-      && rm -rf /var/lib/apt/lists/*
+RUN apt-get update -y --fix-missing \
+    && apt-get upgrade -y \
+    && apt-get -qq install apt-utils -y --no-install-recommends \
+    && apt-get install -y \
+               curl \
+               git \
+               screen \
+               gcc-${CC_VERSION} \
+               g++-${CXX_VERSION} \
+               libboost-all-dev \
+               tzdata \
+               wget \
+               vim \
+               zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install conda
 ## Build combined libgdf/pygdf conda env
