@@ -1,3 +1,5 @@
+ssl_verify: False
+show_channel_urls: True
 channels:
   - rapidsai
   - nvidia
