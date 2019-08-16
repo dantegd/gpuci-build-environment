@@ -1,6 +1,7 @@
 channels:
   - rapidsai
-  - rapidsai-nightly
   - nvidia
+  - rapidsai-nightly
+  - numba
   - conda-forge
-  - defaults
+  - anaconda
